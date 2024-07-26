@@ -65,16 +65,49 @@ public class Stats
     }
     #endregion
 
+    #region Status Stats
     public struct StatusStats
     {
-        
+        public static StatusStat Corruption;
+        public static StatusStat Happiness;
+        public static StatusStat Health;
+        public static StatusStat Psyche;
+        public static StatusStat Satisfaction;
+        public static StatusStat Sociability;
+        public static StatusStat Volition;
+        public static StatusStat Wealth;
     }
-}
 
+    public void InitiateStatusStats(float[] scores)
+    {
+        if (initiated)
+            return;
+        initiated = true;
+        
+        StatusStats.Corruption = new StatusStat(SStats.Cor, scores[0], "Corruption", "How good of a person the character is.");
+        StatusStats.Happiness = new StatusStat(SStats.Hap, scores[1], "Happiness", "How happy character is in the moment.");
+        StatusStats.Health = new StatusStat(SStats.Hth, scores[2], "Health", "How healthy character is.");
+        StatusStats.Psyche = new StatusStat(SStats.Ps, scores[3], "Psyche", "How healthy character's mind is.");
+        StatusStats.Satisfaction = new StatusStat(SStats.Sat, scores[4], "Satisfaction", "How satisfied with his life the character is.");
+        StatusStats.Sociability = new StatusStat(SStats.Soc, scores[5], "Sociability", "How good with people character is.");
+        StatusStats.Volition = new StatusStat(SStats.Vol, scores[6], "Volition", "How likely to take action character is.");
+        StatusStats.Wealth = new StatusStat(SStats.Wth, scores[6], "Wealth", "How wealthy character is.");
+    }
+    #endregion
+}
+#region Basic stats
 public class BasicModifier
 {
     public int Value { get; }
     public BStats Stat;
+    // Add reference on the card
+
+    public BasicModifier(BStats stat, int value)
+    {
+        Value = value;
+        Stat = stat;
+        //card
+    }
 }
 
 public enum BStats
@@ -86,9 +119,11 @@ public class BasicStat
 {
     public BStats Abbreviation;
     public string Name;
-    private string Description;
+    public string Description;
     public int StartingScore { get; }
     public List<BasicModifier> Modifiers;
+
+    private int instantModifierScore = 0;
 
     public int Score
     {
@@ -100,7 +135,7 @@ public class BasicStat
                 modScore += mod.Value;
             }
 
-            return StartingScore + modScore;
+            return StartingScore + modScore + instantModifierScore;
         }
     }
 
@@ -111,4 +146,90 @@ public class BasicStat
         Description = description;
         StartingScore = startingScore;
     }
+
+    public void AddModifier(BasicModifier modifier)
+    {
+        if (!Modifiers.Contains(modifier))
+            Modifiers.Add(modifier);
+    }
+
+    public void AddInstantModifier(int value)
+    {
+        instantModifierScore += value;
+    }
 }
+#endregion
+
+#region Status stats
+public enum SStats
+{
+    Cor, Hap, Hth, Ps, Sat, Soc, Vol, Wth
+}
+
+public class StatusModifier
+{
+    public float Value { get; }
+    public SStats Stat;
+    // card reference
+    
+    public StatusModifier(SStats stat, float value)
+    {
+        Value = value;
+        Stat = stat;
+        //card
+    }
+}
+
+public class StatusStat
+{
+    public SStats Abbreviation;
+    public string Name;
+    public string Description;
+
+    private float minScore = 0;
+    private float maxScore = 100;
+
+    public float StartingScore { get; }
+    public List<StatusModifier> Modifiers;
+
+    private float instantModifierScore = 0;
+
+    public float Score
+    {
+        get
+        {
+            float modScore = 0;
+            foreach (var mod in Modifiers)
+            {
+                modScore += mod.Value;
+            }
+
+            float result = StartingScore + modScore + instantModifierScore;
+
+            if (result <= minScore || result >= maxScore)
+                throw new Exception("Game ended");
+            
+            return StartingScore + modScore + instantModifierScore;
+        }
+    }
+
+    public StatusStat(SStats abbreviation, float startingScore, string name, string description)
+    {
+        Abbreviation = abbreviation;
+        Name = name;
+        Description = description;
+        StartingScore = startingScore;
+    }
+
+    public void AddModifier(StatusModifier modifier)
+    {
+        if (!Modifiers.Contains(modifier))
+            Modifiers.Add(modifier);
+    }
+
+    public void AddInstantModifier(float value)
+    {
+        instantModifierScore += value;
+    }
+}
+#endregion
