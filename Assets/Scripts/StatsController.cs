@@ -7,9 +7,10 @@ public class StatsController : MonoBehaviour
 {
     private Stats _stats = Stats.GetInstance();
 
-    private void Start()
+    private void Awake()
     {
         _stats.InitiateBasicStats(new [] {10, 10, 10, 10, 10, 10, 10});
+        _stats.InitiateStatusStats(new float[] {10, 10, 10, 10, 10, 10, 10, 10});
     }
 }
 
@@ -35,7 +36,8 @@ public class Stats
 
 
 
-    private bool initiated = false;
+    private bool initiatedB = false;
+    private bool initiatedS = false;
 
     #region Basic Stats
     public struct BasicStats
@@ -51,9 +53,9 @@ public class Stats
 
     public void InitiateBasicStats(int[] scores)
     {
-        if (initiated)
+        if (initiatedB)
             return;
-        initiated = true;
+        initiatedB = true;
         
         BasicStats.Emotionality = new BasicStat(BStats.Em, scores[0], "Emotionality", "How much emotions influence character's decisions.");
         BasicStats.Intelligence = new BasicStat(BStats.Int, scores[1], "Intelligence", "How logical and smart character is.");
@@ -62,6 +64,21 @@ public class Stats
         BasicStats.Creativity = new BasicStat(BStats.Cr, scores[4], "Creativity", "How unpredictable character is.");
         BasicStats.BodyFunctionality = new BasicStat(BStats.Bf, scores[5], "Body functionality", "How big of the ultimate unit character's body is.");
         BasicStats.BodyDurability = new BasicStat(BStats.Bd, scores[6], "Body durability", "How durable character's body is.");
+    }
+
+    public static BasicStat GetBasicStatByAbbreviation(BStats abbr)
+    {
+        switch (abbr)
+        {
+           case BStats.Em: return BasicStats.Emotionality;
+           case BStats.Int: return BasicStats.Intelligence;
+           case BStats.Ego: return BasicStats.Ego;
+           case BStats.It: return BasicStats.NTNT;
+           case BStats.Cr: return BasicStats.Creativity;
+           case BStats.Bf: return BasicStats.BodyFunctionality;
+           case BStats.Bd: return BasicStats.BodyDurability;
+           default: return BasicStats.NTNT;
+        }
     }
     #endregion
 
@@ -80,9 +97,9 @@ public class Stats
 
     public void InitiateStatusStats(float[] scores)
     {
-        if (initiated)
+        if (initiatedS)
             return;
-        initiated = true;
+        initiatedS = true;
         
         StatusStats.Corruption = new StatusStat(SStats.Cor, scores[0], "Corruption", "How good of a person the character is.");
         StatusStats.Happiness = new StatusStat(SStats.Hap, scores[1], "Happiness", "How happy character is in the moment.");
@@ -91,7 +108,22 @@ public class Stats
         StatusStats.Satisfaction = new StatusStat(SStats.Sat, scores[4], "Satisfaction", "How satisfied with his life the character is.");
         StatusStats.Sociability = new StatusStat(SStats.Soc, scores[5], "Sociability", "How good with people character is.");
         StatusStats.Volition = new StatusStat(SStats.Vol, scores[6], "Volition", "How likely to take action character is.");
-        StatusStats.Wealth = new StatusStat(SStats.Wth, scores[6], "Wealth", "How wealthy character is.");
+        StatusStats.Wealth = new StatusStat(SStats.Wth, scores[7], "Wealth", "How wealthy character is.");
+    }
+
+    public static StatusStat GetStatusStatByAbbreviation(SStats abbr)
+    {
+        switch (abbr)
+        {
+            case SStats.Cor: return StatusStats.Corruption;
+            case SStats.Hap: return StatusStats.Happiness;
+            case SStats.Hth: return StatusStats.Health;
+            case SStats.Ps: return StatusStats.Psyche;
+            case SStats.Sat: return StatusStats.Satisfaction;
+            case SStats.Soc: return StatusStats.Sociability;
+            case SStats.Vol: return StatusStats.Volition;
+            default: return StatusStats.Wealth;
+        }
     }
     #endregion
 }
@@ -121,7 +153,7 @@ public class BasicStat
     public string Name;
     public string Description;
     public int StartingScore { get; }
-    public List<BasicModifier> Modifiers;
+    public List<BasicModifier> Modifiers = new List<BasicModifier>();
 
     private int instantModifierScore = 0;
 
@@ -190,7 +222,7 @@ public class StatusStat
     private float maxScore = 100;
 
     public float StartingScore { get; }
-    public List<StatusModifier> Modifiers;
+    public List<StatusModifier> Modifiers = new List<StatusModifier>();
 
     private float instantModifierScore = 0;
 
