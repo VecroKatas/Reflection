@@ -8,7 +8,7 @@ public interface ICard
     string Description { get; }
     int CardID { get; }
     bool OnTheTable { get; set; }
-    int PoolID { get; }
+    int[] PoolIDs { get; }
 
     //value, which determines the chance to be drawn from deck
     float Relevance();
@@ -17,7 +17,3 @@ public interface ICard
     bool CanBeDrawn();
 }
 
-public interface ITrigger
-{
-    bool IsTriggered();
-}

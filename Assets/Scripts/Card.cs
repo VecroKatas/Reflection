@@ -2,30 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class OpportunityCard : ScriptableObject, ICard
+public class Card : ScriptableObject, ICard
 {
-    [SerializeField] public string Name { get; }
-    [SerializeField] public string Description { get; }
-
-    [SerializeField] public int CardID { get; }
-    [SerializeField] public bool OnTheTable { get; set; }
-    [SerializeField] public int[] StatusStatModifiers { get; }
-    [SerializeField] public int[] ProbabilityModifiers { get; }
-    public ITrigger[] Prerequisites { get; }
-    [SerializeField] public int PoolID { get; }
-    public ICard[] SummonCards { get; }
-
-
-    public OpportunityCard(string Name, string Description, int ID, int PoolID, int[] StatusStatModifiers, params ITrigger[] triggers)
-    {
-        this.Name = Name;
-        this.Description = Description;
-        this.CardID = ID;
-        this.Prerequisites = triggers;
-        this.StatusStatModifiers = StatusStatModifiers;
-        this.PoolID = PoolID;
-    }
+    [SerializeField] protected string _Name;
+    [SerializeField] protected string _Description;
+    [SerializeField] protected int _CardID;
+    [SerializeField] protected bool _OnTheTable;
+    [SerializeField] protected int[] _PoolIDs; //Pools from which card can be drawn
+    [SerializeField] protected int[] _ProbabilityModifiers; //how stats affect probability of drawing a card
+    [SerializeField] protected int[] _PrerequisiteIDs; //Prerequisite triggers for card to be drawn
+    [SerializeField] protected int[] _SummonCardIDs;
+    public string Name { get; }
+    public string Description { get; }
+    public int CardID { get; }
+    public bool OnTheTable { get; set; }
+    public int[] ProbabilityModifiers { get; }
+    public int[] PrerequisiteIDs { get; }
+    public int[] PoolIDs { get; }
+    public int[] SummonCardIDs { get; }
 
     //value, which determines the chance to be drawn from deck
     public float Relevance()
@@ -42,10 +36,10 @@ public class OpportunityCard : ScriptableObject, ICard
     //Are all conditions for card to appear in the deck met
     public bool CanBeDrawn()
     {
-        foreach (ITrigger trigger in Prerequisites)
-            if (!trigger.IsTriggered()) return false;
+        ITrigger[] allTriggers = Resources.LoadAll<Trigger>("");
+        foreach (ITrigger trigger in allTriggers)
+            foreach (int triggerID in this._PrerequisiteIDs)
+                if (trigger.ID == triggerID && !trigger.IsTriggered) return false;
         return true;
     }
 }
-
-
