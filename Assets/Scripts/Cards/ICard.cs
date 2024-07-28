@@ -4,11 +4,12 @@ using UnityEngine;
 
 public interface ICard
 {
-    string Name { get; }
-    string Description { get; }
-    int CardID { get; }
-    bool OnTheTable { get; set; }
-    int[] PoolIDs { get; }
+    public string Name { get; }
+    public string Description { get; }
+    public int CardID { get; }
+    public bool OnTheTable { get; set; }
+    public int[] PoolIDs { get; }
+    public CardSummoner[] CardSummoners { get; }
 
     //value, which determines the chance to be drawn from deck
     float Relevance();
