@@ -17,7 +17,7 @@ MonoBehaviour:
   _CardID: 0
   _OnTheTable: 0
   _PoolIDs: 
-  _TimeOnTable: 0
   _ProbabilityModifiers: 
   _PrerequisiteIDs: 
   _SummonCardIDs: 
+  _TimeOnTable: 0

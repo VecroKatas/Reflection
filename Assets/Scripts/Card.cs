@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.WebSockets;
 using UnityEngine;
 
 public class Card : ScriptableObject, ICard
@@ -12,6 +14,7 @@ public class Card : ScriptableObject, ICard
     [SerializeField] protected int[] _ProbabilityModifiers; //how stats affect probability of drawing a card
     [SerializeField] protected int[] _PrerequisiteIDs; //Prerequisite triggers for card to be drawn
     [SerializeField] protected int[] _SummonCardIDs;
+    
     public string Name { get; }
     public string Description { get; }
     public int CardID { get; }
@@ -40,6 +43,7 @@ public class Card : ScriptableObject, ICard
         foreach (ITrigger trigger in allTriggers)
             foreach (int triggerID in this._PrerequisiteIDs)
                 if (trigger.ID == triggerID && !trigger.IsTriggered) return false;
+        
         return true;
     }
 }

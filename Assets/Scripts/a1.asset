@@ -16,6 +16,8 @@ MonoBehaviour:
   _Description: 
   _CardID: 0
   _OnTheTable: 0
-  _PoolIDs: 01000000
-  _StatusStatModifiers: 0000000000000000
+  _PoolIDs: 
   _ProbabilityModifiers: 
+  _PrerequisiteIDs: 
+  _SummonCardIDs: 
+  _StatusStatModifiers: 0000000000000000
