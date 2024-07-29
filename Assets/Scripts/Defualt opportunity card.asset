@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07dc22df11653a24fbec421609a62f3e, type: 3}
-  m_Name: 1
+  m_Script: {fileID: 11500000, guid: e83e1ad19899e4549850ad9a82cb6c75, type: 3}
+  m_Name: Defualt opportunity card
   m_EditorClassIdentifier: 
-  _Name: Example event card
-  _Description: some cool description
-  _CardID: 1
+  _Name: Default opportunity card
+  _Description: nothing to see here folks
+  _CardID: 0
   _PoolIDs: 
   _BStatProbabilityModifiers: []
   _SStatProbabilityModifiers: []
@@ -24,4 +24,4 @@ MonoBehaviour:
   _CardsPlayedConditions: []
   _CurrentTurnConditions: []
   _CardSummoners: []
-  _TimeOnTable: 0
+  _StatusStatModifiers: 

@@ -1,16 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HandCardController : MonoBehaviour
 {
     [SerializeField] private RectTransform rectTransform;
+    [SerializeField] private TextMeshProUGUI cardName;
+    [SerializeField] private TextMeshProUGUI cardDescription;
+    [SerializeField] private Image image;
     [SerializeField] private Vector3 minSize;
     [SerializeField] private Vector3 maxSize;
+
+    //public ICard AttachedCard;
+    public EventCard AttachedCard;
     
     private bool scaleUpEnded = false;
     private bool pointerExited = true;
+
+    private void Start()
+    {
+        cardName.text = AttachedCard.Name;
+        cardDescription.text = AttachedCard.Description;
+    }
 
     public void PointerEnter()
     {
