@@ -5,27 +5,38 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
-    [SerializeField] private static GameObject HandCard;
-    [SerializeField] private static GameObject CardOnTable;
-    public static int MaxHandSize = 10;
-    public static List<ICard> Cards = new List<ICard>();
-    public static List<HandCardController> HandCards = new List<HandCardController>();
+    [SerializeField] private DeckController _deckController;
+    [SerializeField] private TableController _tableController;
+    [SerializeField] private DiscardController _discardController;
+    
+    [SerializeField] private GameObject HandCard;
+    [SerializeField] private GameObject CardOnTable;
+    public int MaxHandSize = 10;
+    public List<ICard> Cards = new List<ICard>();
+    public List<HandCardController> HandCards = new List<HandCardController>();
 
-    public static void DrawCards([CanBeNull] List<ICard> cardsToDraw)
+    public void CheckHand()
     {
-        if (cardsToDraw != null)
-            cardsToDraw.ForEach(c => Cards.Add(c));
-
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            HandCardController handCardController = transform.GetChild(i).GetComponent<HandCardController>();
+            if (!HandCards.Contains(handCardController))
+                HandCards.Add(handCardController);
+        }
+    }
+    
+    public void DrawCards([CanBeNull] List<ICard> cardsToDraw)
+    {
         while (Cards.Count < MaxHandSize)
         {
             ICard drawnCard;
-            if (Cards.Count > 0)
+            if (cardsToDraw.Count > 0) // does it work?
             {
-                drawnCard = DeckController.DrawCard(Cards[0]);
-                Cards.RemoveAt(0);
+                drawnCard = _deckController.DrawCard(cardsToDraw[0]);
+                cardsToDraw.RemoveAt(0);
             }
             else
-                drawnCard = DeckController.DrawCard();
+                drawnCard = _deckController.DrawCard();
 
             Cards.Add(drawnCard);
 
@@ -33,43 +44,35 @@ public class HandController : MonoBehaviour
         }
     }
 
-    private static void CreateCardInHand(ICard card)
+    private void CreateCardInHand(ICard card)
     {
         GameObject cardInHand = Instantiate(HandCard, Vector3.zero, Quaternion.identity);
-        //cardInHand.transform.SetParent();
+        cardInHand.GetComponent<HandCardController>().AttachedCard = card;
+        cardInHand.transform.SetParent(transform);
     }
 
-    /*public void PlayCard(HandCard handCard)
+    public void PlayCard(HandCardController handCard)
     {
-        TableController.PLayCard(handCard.ICard);
+        _tableController.PlayCard(handCard.AttachedCard);
 
-        DeleteHandCard();
-    }*/
-
-    public static void DiscardAllCards()
-    {
-        
+        DeleteHandCard(handCard);
     }
-    
-    
-    
-    
-    
-    private HandController() { }
 
-    private static HandController _instance;
-    
-    private static readonly object _lock = new object();
-
-    public static HandController GetInstance()
+    public void DiscardAllCards()
     {
-        if (_instance == null)
-            lock (_lock)
-                if (_instance == null)
-                {
-                    _instance = new HandController();
-                }
+        CheckHand();
 
-        return _instance;
+        while (HandCards.Count > 0)
+        {
+            _discardController.DiscardCard(HandCards[0].AttachedCard);
+            DeleteHandCard(HandCards[0]);
+        }
+    }
+
+    private void DeleteHandCard(HandCardController handCard)
+    {
+        HandCards.Remove(handCard);
+        Cards.Remove(handCard.AttachedCard);
+        Destroy(handCard.gameObject);
     }
 }

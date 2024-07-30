@@ -14,8 +14,7 @@ public class HandCardController : MonoBehaviour
     [SerializeField] private Vector3 minSize;
     [SerializeField] private Vector3 maxSize;
 
-    //public ICard AttachedCard;
-    public EventCard AttachedCard;
+    public ICard AttachedCard;
     
     private bool scaleUpEnded = false;
     private bool pointerExited = true;
