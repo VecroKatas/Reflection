@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4394864813756222042}
   - component: {fileID: 6433375913838575880}
   - component: {fileID: 7478080634872808293}
+  - component: {fileID: 6216164025128853779}
   m_Layer: 0
   m_Name: HandUI
   m_TagString: Untagged
@@ -127,6 +128,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &6216164025128853779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4041216557147533768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d4ebf8fa0e9684b898b282a3a92420, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deckController: {fileID: 0}
+  _tableController: {fileID: 0}
+  _discardController: {fileID: 0}
+  HandCard: {fileID: 3104015884984209424, guid: 01f4a50b88298c14ea9e8230e73930e2, type: 3}
+  CardOnTable: {fileID: 4113170322834419378, guid: 781e3f11aa3b7e548a1f972c396b34dc, type: 3}
+  Hand: {fileID: 0}
 --- !u!1001 &387049590662720310
 PrefabInstance:
   m_ObjectHideFlags: 0
