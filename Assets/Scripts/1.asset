@@ -17,11 +17,14 @@ MonoBehaviour:
   _CardID: 0
   _PoolIDs: 
   _BStatProbabilityModifiers: []
-  _SStatProbabilityModifiers: []
+  _SStatProbabilityModifiers:
+  - stat: 7
+    _ChanceMultiplier: 0
   _CurrentTurnProbabilityModifiers: []
   _BStatConditions: []
   _SStatConditions: []
   _CardsPlayedConditions: []
   _CurrentTurnConditions: []
-  _CardSummoners: []
+  _CardSummoners:
+  - _SummonChance: 0
   _TimeOnTable: 0
