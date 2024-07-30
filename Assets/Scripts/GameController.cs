@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] private HandController _handController;
+    
     public List<ICard> CardsToDraw = new List<ICard>();
     
     private void Start()
@@ -16,30 +18,10 @@ public class GameController : MonoBehaviour
 
     public void StartNextTurn()
     {
-        HandController.DiscardAllCards();
+        _handController.DiscardAllCards();
         
-        HandController.DrawCards(CardsToDraw);
+        _handController.DrawCards(CardsToDraw);
         
         
-    }
-    
-    
-    
-    private GameController() { }
-
-    private static GameController _instance;
-    
-    private static readonly object _lock = new object();
-
-    public static GameController GetInstance()
-    {
-        if (_instance == null)
-            lock (_lock)
-                if (_instance == null)
-                {
-                    _instance = new GameController();
-                }
-
-        return _instance;
     }
 }
