@@ -23,7 +23,13 @@ public class Card : ScriptableObject, ICard
     [SerializeField] protected CardSummoner[] _CardSummoners;
     public string Name => _Name;
     public string Description => _Description;
-    public int CardID => _CardID;   
+    // temporarily changed
+    //public int CardID => _CardID;
+    public int CardID
+    {
+        get { return _CardID; }
+        set { _CardID = value; }
+    }   
     public int[] PoolIDs => _PoolIDs;
     public CardSummoner[] CardSummoners => _CardSummoners;
 
