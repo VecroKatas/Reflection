@@ -14,6 +14,7 @@ public class DiscardController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        throw new NotImplementedException();
+        DiscardCard(other.gameObject.GetComponent<TableCard>().AttachedCard);
+        Destroy(other.gameObject);
     }
 }

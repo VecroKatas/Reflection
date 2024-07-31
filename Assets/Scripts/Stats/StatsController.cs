@@ -2,15 +2,30 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class StatsController : MonoBehaviour
 {
     private Stats _stats = Stats.GetInstance();
+    private Random rand = new Random();
 
+    [SerializeField] private GameController _gameController;
+    
     private void Awake()
     {
-        _stats.InitiateBasicStats(new [] {10, 10, 10, 10, 10, 10, 10});
-        _stats.InitiateStatusStats(new float[] {10, 10, 10, 10, 10, 10, 10, 10});
+        _stats.InitiateBasicStats(new [] {rand.Next(1, 20), rand.Next(1, 20), rand.Next(1, 20), rand.Next(1, 20), rand.Next(1, 20), rand.Next(1, 20), rand.Next(1, 20)});
+        _stats.InitiateStatusStats(new float[] {rand.Next(1, 30), rand.Next(1, 30), rand.Next(1, 30), rand.Next(1, 30), rand.Next(1, 30), rand.Next(1, 30), rand.Next(1, 30), rand.Next(1, 30)});
+    }
+
+    private void FixedUpdate()
+    {
+        if (Stats.StatusStats.Corruption.Score <= 0) _gameController.GameEnd();
+        if (Stats.StatusStats.Happiness.Score <= 0) _gameController.GameEnd();
+        if (Stats.StatusStats.Psyche.Score <= 0) _gameController.GameEnd();
+        if (Stats.StatusStats.Health.Score <= 0) _gameController.GameEnd();
+        if (Stats.StatusStats.Sociability.Score <= 0) _gameController.GameEnd();
+        if (Stats.StatusStats.Volition.Score <= 0) _gameController.GameEnd();
+        if (Stats.StatusStats.Wealth.Score <= 0) _gameController.GameEnd();
     }
 }
 
@@ -237,9 +252,6 @@ public class StatusStat
             }
 
             float result = StartingScore + modScore + instantModifierScore;
-
-            if (result <= minScore || result >= maxScore)
-                throw new Exception("Game ended");
             
             return StartingScore + modScore + instantModifierScore;
         }
