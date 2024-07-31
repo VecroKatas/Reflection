@@ -202,13 +202,13 @@ public class StatusModifier
 {
     public float Value { get; }
     public SStats Stat;
-    // card reference
+    public ICard CardProvoked;
     
-    public StatusModifier(SStats stat, float value)
+    public StatusModifier(SStats stat, float value, ICard Card)
     {
         Value = value;
         Stat = stat;
-        //card
+        CardProvoked = Card;
     }
 }
 

@@ -21,8 +21,8 @@ public class HandCardController : MonoBehaviour
 
     private void Start()
     {
-        cardName.text = AttachedCard.Name;
-        cardDescription.text = AttachedCard.Description;
+        //cardName.text = AttachedCard.Name;
+        //cardDescription.text = AttachedCard.Description;
     }
 
     public void PointerEnter()

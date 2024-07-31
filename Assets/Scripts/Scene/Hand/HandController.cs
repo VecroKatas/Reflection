@@ -24,7 +24,7 @@ public class HandController : MonoBehaviour
                 HandCards.Add(handCardController);
         }
     }
-    
+
     public void DrawCards([CanBeNull] List<ICard> cardsToDraw)
     {
         while (Cards.Count < MaxHandSize)
@@ -40,7 +40,7 @@ public class HandController : MonoBehaviour
 
             Cards.Add(drawnCard);
 
-            CreateCardInHand(drawnCard); 
+            CreateCardInHand(drawnCard);
         }
     }
 

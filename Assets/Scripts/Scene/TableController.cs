@@ -9,6 +9,6 @@ public class TableController : MonoBehaviour
     public void PlayCard(ICard card)
     {
         CardsOnTable.Add(card);
-        //idfk for now  
+        card.Play(); 
     }
 }

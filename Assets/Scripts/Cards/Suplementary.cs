@@ -2,8 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
-public class BStatCondition
+public class Condition : ScriptableObject
+{
+    public bool IsFullfilled()
+    {
+        return false;
+    }
+}
+
+[CreateAssetMenu]
+[System.Serializable]
+public class BStatCondition : Condition
 {
     [SerializeField] BStats stat;
     [SerializeField] int MinValue;
@@ -17,8 +28,9 @@ public class BStatCondition
     }
 }
 
+[CreateAssetMenu]
 [System.Serializable]
-public class SStatCondition
+public class SStatCondition : Condition
 {
     [SerializeField] SStats stat;
     [SerializeField] float MinValue;
@@ -32,8 +44,9 @@ public class SStatCondition
     }
 }
 
+[CreateAssetMenu]
 [System.Serializable]
-public class CardsPlayedCondition
+public class CardsPlayedCondition : Condition
 {
     [SerializeField] ICard[] NeccesaryCards;
 
@@ -44,8 +57,9 @@ public class CardsPlayedCondition
     }
 }
 
+[CreateAssetMenu]
 [System.Serializable]
-public class CurrentTurnCondition
+public class CurrentTurnCondition : Condition
 {
     [SerializeField] int MinTurn;
     [SerializeField] int MaxTurn;
@@ -57,8 +71,9 @@ public class CurrentTurnCondition
     }
 }
 
+[CreateAssetMenu]
 [System.Serializable]
-public class BStatProbabilityModifier
+public class BStatProbabilityModifier : ScriptableObject
 {
     [SerializeField] BStats stat;
     [SerializeField] float _ChanceMultiplier;
@@ -69,8 +84,9 @@ public class BStatProbabilityModifier
     }
 }
 
+[CreateAssetMenu]
 [System.Serializable]
-public class SStatProbabilityModifier
+public class SStatProbabilityModifier : ScriptableObject
 {
     [SerializeField] SStats stat;
     [SerializeField] float _ChanceMultiplier;
@@ -80,8 +96,9 @@ public class SStatProbabilityModifier
     }
 }
 
+[CreateAssetMenu]
 [System.Serializable]
-public class CurrentTurnProbabilityModifier
+public class CurrentTurnProbabilityModifier : ScriptableObject
 {
     [SerializeField] int MinTurn;
     [SerializeField] int MaxTurn;
@@ -92,8 +109,8 @@ public class CurrentTurnProbabilityModifier
 [System.Serializable]
 public class CardSummoner
 {
-    [SerializeField] ICard _SummonedCard;
+    [SerializeField] Card _SummonedCard;
     [SerializeField] int _SummonChance;
     public int SummonChance => _SummonChance;
-    public ICard SummonedCard => _SummonedCard;
+    public Card SummonedCard => _SummonedCard;
 }
