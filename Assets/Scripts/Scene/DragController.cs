@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class DragController : MonoBehaviour
 {
@@ -21,12 +22,12 @@ public class DragController : MonoBehaviour
         if (!targetCamera)
             return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !IsMouseOverUI())
         {
             //Check if we are hovering over Rigidbody, if so, select it
             selectedRigidbody = GetRigidbodyFromMouseClick();
         }
-        if (Input.GetMouseButtonUp(0) && selectedRigidbody)
+        if (Input.GetMouseButtonUp(0) && selectedRigidbody && !IsMouseOverUI())
         {
             //Release selected Rigidbody if there any
             if (selectedRigidbody.velocity.z <= 0)
@@ -40,7 +41,7 @@ public class DragController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (selectedRigidbody)
+        if (selectedRigidbody && !IsMouseOverUI())
         {
             Vector3 mousePositionOffset;
             if (selectedRigidbody.transform.position.z >= 1.5f)
@@ -69,5 +70,12 @@ public class DragController : MonoBehaviour
         }
 
         return null;
+    }
+
+    private bool IsMouseOverUI()
+    {
+        // fix later
+        return false;
+        //return EventSystem.current.IsPointerOverGameObject();
     }
 }
