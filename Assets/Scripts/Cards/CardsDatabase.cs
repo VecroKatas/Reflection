@@ -20,4 +20,8 @@ public class CardsDatabase : ScriptableObject
     {
         UpdateID();
     }
+    
+    
+    
+    
 }

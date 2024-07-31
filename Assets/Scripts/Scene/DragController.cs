@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -74,7 +75,15 @@ public class DragController : MonoBehaviour
 
     private bool IsMouseOverUI()
     {
-        // fix later
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+        foreach (var raycastResult in raycastResults)
+            if (raycastResult.gameObject.GetComponent<UIClickBlock>() != null)
+                return true;
+
         return false;
         //return EventSystem.current.IsPointerOverGameObject();
     }
