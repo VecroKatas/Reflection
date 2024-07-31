@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
-
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+//, IBeginDragHandler, IEndDragHandler, IDragHandler
 public class HandController : MonoBehaviour
 {
     [SerializeField] private DeckController _deckController;
@@ -10,7 +13,6 @@ public class HandController : MonoBehaviour
     [SerializeField] private DiscardController _discardController;
     
     [SerializeField] private GameObject HandCard;
-    [SerializeField] private GameObject CardOnTable;
     public int MaxHandSize = 10;
     public List<ICard> Cards = new List<ICard>();
     public List<HandCardController> HandCards = new List<HandCardController>();
@@ -75,4 +77,40 @@ public class HandController : MonoBehaviour
         Cards.Remove(handCard.AttachedCard);
         Destroy(handCard.gameObject);
     }
+    
+    
+    
+    
+    public void OnDragStart(GameObject obj)
+    {
+        MouseData.tempCard = CreateTempItem(obj);
+    }
+    public GameObject CreateTempItem(GameObject obj)
+    {
+        GameObject tempLocalCard = null;
+        if(obj.GetComponent<HandCardController>().AttachedCard.CardID >= 0)
+        {
+            
+        }
+        return tempLocalCard;
+    }
+    public void OnDragEnd(HandCardController handCardController)
+    {
+        Destroy(MouseData.tempCard);
+        if (MouseData.hoveredOver.name == "Table")
+        {
+            PlayCard(handCardController);
+        }
+    }
+    public void OnDrag(GameObject obj)
+    {
+        if (MouseData.tempCard != null)
+            MouseData.tempCard.GetComponent<RectTransform>().position = Input.mousePosition;
+    }
+}
+
+public static class MouseData
+{
+    public static GameObject tempCard;
+    public static GameObject hoveredOver;
 }

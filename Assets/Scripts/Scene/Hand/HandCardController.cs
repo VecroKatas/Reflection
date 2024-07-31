@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class HandCardController : MonoBehaviour
+public class HandCardController : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private TextMeshProUGUI cardName;
@@ -18,6 +19,11 @@ public class HandCardController : MonoBehaviour
     
     private bool scaleUpEnded = false;
     private bool pointerExited = true;
+    private static bool beingDragged = false;
+
+    private GameObject clone;
+    private RectTransform rt;
+    private float mouseY;
 
     private void Start()
     {
@@ -27,15 +33,21 @@ public class HandCardController : MonoBehaviour
 
     public void PointerEnter()
     {
-        pointerExited = false;
-        StartCoroutine(ScaleUp());
+        if (!beingDragged)
+        {
+            pointerExited = false;
+            StartCoroutine(ScaleUp());
+        }
     }
 
     public void PointerExit()
     {
-        pointerExited = true;
-        if (scaleUpEnded)
-            StartCoroutine(ScaleDown());
+        if (!beingDragged)
+        {
+            pointerExited = true;
+            if (scaleUpEnded)
+                StartCoroutine(ScaleDown());
+        }
     }
     
     IEnumerator ScaleUp()
@@ -73,5 +85,35 @@ public class HandCardController : MonoBehaviour
     private float EaseIn(float i)
     {
         return (float)Math.Sin((i * Math.PI) / 2);
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        StartCoroutine(ScaleDown());
+        beingDragged = true;
+        
+        clone = Instantiate(gameObject, transform.localPosition, Quaternion.identity);
+        clone.GetComponent<HandCardController>().AttachedCard = AttachedCard;
+        clone.transform.SetParent(transform.parent);
+        rt = clone.GetComponent<RectTransform>();
+        rt.localScale = maxSize;
+        rt.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, rectTransform.anchoredPosition.y + rectTransform.parent.GetComponent<RectTransform>().sizeDelta.y);
+        mouseY = rectTransform.anchoredPosition.y + rectTransform.parent.GetComponent<RectTransform>().sizeDelta.y;
+        
+        rt.gameObject.GetComponent<LayoutElement>().ignoreLayout = true;
+    }
+    
+    public void OnDrag(PointerEventData eventData)
+    {
+        rt.anchoredPosition += eventData.delta;
+    }
+    
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        beingDragged = false;
+        rt.gameObject.GetComponent<LayoutElement>().ignoreLayout = false;
+        if (rt.anchoredPosition.y > mouseY + rectTransform.parent.GetComponent<RectTransform>().sizeDelta.y)
+            transform.parent.GetComponent<HandController>().PlayCard(this);
+        Destroy(clone);
+        rt = null;
     }
 }
