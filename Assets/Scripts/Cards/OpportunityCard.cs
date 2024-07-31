@@ -6,10 +6,10 @@ using UnityEngine;
 public class OpportunityCard : DrawableCard
 {
     [SerializeField] int[] _StatusStatModifiers; //how card affects status
-    [SerializeField] int[] _FunValue; //Value, that describes how fun it would be for shadow to take the opportunity
-    [SerializeField] int[] _UsefulValue; //Value, that describes how good and proficient it would be for shadow to take the opportunity
-    public int[] FunValue => _FunValue;
-    public int[] UsefulValue => _UsefulValue;
+    [SerializeField] int _FunValue; //Value, that describes how fun it would be for shadow to take the opportunity
+    [SerializeField] int _UsefulValue; //Value, that describes how good and proficient it would be for shadow to take the opportunity
+    public int FunValue => _FunValue;
+    public int UsefulValue => _UsefulValue;
 
     public int Play()
     {
