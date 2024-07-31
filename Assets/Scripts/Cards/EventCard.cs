@@ -44,6 +44,28 @@ public class EventCard : DrawableCard
             }
         }          
     }
+
+    public void OnTick()
+    {
+        Stats.StatusStats.Corruption.AddInstantModifier(_StatusStatModifiersPerTick[0]);
+        Stats.StatusStats.Happiness.AddInstantModifier(_StatusStatModifiersPerTick[1]);
+        Stats.StatusStats.Health.AddInstantModifier(_StatusStatModifiersPerTick[2]);
+        Stats.StatusStats.Psyche.AddInstantModifier(_StatusStatModifiersPerTick[3]);
+        Stats.StatusStats.Satisfaction.AddInstantModifier(_StatusStatModifiersPerTick[4]);
+        Stats.StatusStats.Sociability.AddInstantModifier(_StatusStatModifiersPerTick[5]);
+        Stats.StatusStats.Volition.AddInstantModifier(_StatusStatModifiersPerTick[6]);
+        Stats.StatusStats.Wealth.AddInstantModifier(_StatusStatModifiersPerTick[7]);
+
+        foreach (CardSummoner sumon in _CardsSummonPerTick)
+        {
+            int Determinant = Random.Range(0, 100);
+            if (sumon.SummonChance > Determinant)
+            {
+                sumon.SummonedCard.Play();
+                break;
+            }
+        }
+    }
 }
 
 

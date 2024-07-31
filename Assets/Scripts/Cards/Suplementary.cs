@@ -48,10 +48,11 @@ public class SStatCondition : Condition
 [System.Serializable]
 public class CardsPlayedCondition : Condition
 {
-    [SerializeField] ICard[] NeccesaryCards;
+    [SerializeField] Card[] NeccesaryCards;
 
     public bool IsFullfilled()
     {
+        //idfk how to acces discardcontroller from there
         //Checks if table or discard pile have ALL listed cards
         return true;
     }
@@ -113,4 +114,24 @@ public class CardSummoner
     [SerializeField] int _SummonChance;
     public int SummonChance => _SummonChance;
     public Card SummonedCard => _SummonedCard;
+}
+
+[System.Serializable]
+public class BStatModifier
+{
+    [SerializeField] BStats _stat;
+    [SerializeField] int _Value;
+
+    public BStats stat => _stat;
+    public int Value => _Value;
+}
+
+[System.Serializable]
+public class SStatModifier
+{
+    [SerializeField] SStats _stat;
+    [SerializeField] float _Value;
+
+    public SStats stat => _stat;
+    public float Value => _Value;
 }

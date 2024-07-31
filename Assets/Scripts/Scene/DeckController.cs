@@ -37,11 +37,10 @@ public class DeckController : MonoBehaviour
         int Determinator = _random.Next(0, OverallValue);
         for (int i = 0; i < Length; i++)
         {
-            if (RelevanceValues[i] + AdddedValue > Determinator)
-                
+            if (RelevanceValues[i] + AdddedValue >= Determinator)
+                return _cardsDatabase.Cards[i];
             AdddedValue += RelevanceValues[i];
         }
-
-        return _cardsDatabase.Cards[_random.Next(_cardsDatabase.Cards.Length)];
+        return null; // it shouldn`t reach this line ever
     }
 }

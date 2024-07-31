@@ -132,13 +132,13 @@ public class BasicModifier
 {
     public int Value { get; }
     public BStats Stat;
-    // Add reference on the card
+    public ICard CardProvoked;
 
-    public BasicModifier(BStats stat, int value)
+    public BasicModifier(BStats stat, int value, ICard Card)
     {
         Value = value;
         Stat = stat;
-        //card
+        CardProvoked = Card;
     }
 }
 
