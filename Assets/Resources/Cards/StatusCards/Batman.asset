@@ -10,17 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 807a9a3ce3deb1f40b456df633b85021, type: 3}
-  m_Name: Vengeance
+  m_Name: Batman
   m_EditorClassIdentifier: 
-  _Name: Vengeance
-  _Description: I am vengeance
-  _CardID: 1
+  _Name: BATMAN
+  _Description: I am batman
+  _CardID: 2
   _PoolIDs: 
   _CardSummoners: []
   _BStatModifiers:
+  - {fileID: 11400000, guid: cd7aac20bfebf0a44b5629c4d7aa5be3, type: 2}
+  - {fileID: 11400000, guid: 5a04150a4c935894fbfcad42cff90a64, type: 2}
   - {fileID: 11400000, guid: 8fff087d97106a5489c6977d7524a3c0, type: 2}
-  _SStatModifiers:
-  - {fileID: 11400000, guid: f5eca40a3acf69141a0d01c1285ff5a7, type: 2}
-  - {fileID: 11400000, guid: 95706b0b52d1cb748b1c6cec880a35dd, type: 2}
-  - {fileID: 11400000, guid: f0d6324f7ae9d414189428ec54f0eb24, type: 2}
-  - {fileID: 11400000, guid: b64eaa4760823b5419335536f96c60d9, type: 2}
+  _SStatModifiers: []
