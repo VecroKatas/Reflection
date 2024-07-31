@@ -6,13 +6,12 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private HandController _handController;
-    
+
     public List<ICard> CardsToDraw = new List<ICard>();
-    
+
     private void Start()
     {
         //some initialization
-        
         StartNextTurn();
     }
 
@@ -21,7 +20,6 @@ public class GameController : MonoBehaviour
         _handController.DiscardAllCards();
         
         _handController.DrawCards(CardsToDraw);
-        
-        
+               
     }
 }

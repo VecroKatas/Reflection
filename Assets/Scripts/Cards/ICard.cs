@@ -12,9 +12,11 @@ public interface ICard
     public CardSummoner[] CardSummoners { get; }
 
     //value, which determines the chance to be drawn from deck
-    float Relevance();
+    int Relevance();
 
     //Are all conditions for card to appear in the deck met
     bool CanBeDrawn();
+
+    void Play();
 }
 
