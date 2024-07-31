@@ -43,4 +43,10 @@ public class DeckController : MonoBehaviour
         }
         return null; // it shouldn`t reach this line ever
     }
+
+    void OnApplicationQuit()
+    {
+        foreach (ICard card in _cardsDatabase.Cards)
+            card.HasBeenPlayed = true;
+    }
 }

@@ -11,8 +11,9 @@ public class OpportunityCard : DrawableCard
     public int[] FunValue => _FunValue;
     public int[] UsefulValue => _UsefulValue;
 
-    public void Play()
+    public int Play()
     {
+        this._HasBeenPlayed = true;
         Stats.StatusStats.Corruption.AddInstantModifier(_StatusStatModifiers[0]);
         Stats.StatusStats.Happiness.AddInstantModifier(_StatusStatModifiers[1]);
         Stats.StatusStats.Health.AddInstantModifier(_StatusStatModifiers[2]);
@@ -26,11 +27,9 @@ public class OpportunityCard : DrawableCard
         {
             int Determinant = Random.Range(0, 100);
             if (sumon.SummonChance > Determinant)
-            {
-                sumon.SummonedCard.Play();
-                break;
-            }
+                return sumon.SummonedCard.CardID;
         }
+        return -1;
     }
 }
 
