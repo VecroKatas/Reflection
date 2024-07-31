@@ -10,6 +10,7 @@ public class Card : ScriptableObject, ICard
     [SerializeField] protected string _Description;
     [SerializeField] protected int _CardID;
     [SerializeField] protected int[] _PoolIDs; //Pools from which card can be drawn
+    protected bool _HasBeenPlayed = false;
 
     [SerializeField] protected CardSummoner[] _CardSummoners;
     public string Name => _Name;
@@ -20,7 +21,13 @@ public class Card : ScriptableObject, ICard
     {
         get { return _CardID; }
         set { _CardID = value; }
-    }   
+    }
+
+    public bool HasBeenPlayed
+    {
+        get { return _HasBeenPlayed; }
+        set { _HasBeenPlayed = value; }
+    }
     public int[] PoolIDs => _PoolIDs;
     public CardSummoner[] CardSummoners => _CardSummoners;
 
@@ -37,8 +44,8 @@ public class Card : ScriptableObject, ICard
         return false;
     }
 
-    public void Play()
+    public int Play()
     {
-
+        return 0;
     }
 }

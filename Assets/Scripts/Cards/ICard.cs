@@ -8,6 +8,7 @@ public interface ICard
     public string Description { get; }
     public int CardID { get; }
     public bool OnTheTable { get; set; }
+    public bool HasBeenPlayed { get; set; }
     public int[] PoolIDs { get; }
     public CardSummoner[] CardSummoners { get; }
 
@@ -17,6 +18,6 @@ public interface ICard
     //Are all conditions for card to appear in the deck met
     bool CanBeDrawn();
 
-    void Play();
+    int Play();
 }
 

@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class StatusCard : Card
 {
     [SerializeField] BStatModifier[] _BStatModifiers;
     [SerializeField] SStatModifier[] _SStatModifiers;
 
-    void Play()
+    int Play()
     {
+        this._HasBeenPlayed = true;
         foreach (BStatModifier mod in _BStatModifiers)
         {
             BasicModifier mod1 = new BasicModifier(mod.stat, mod.Value, this);
@@ -19,5 +21,6 @@ public class StatusCard : Card
             StatusModifier mod1 = new StatusModifier(mod.stat, mod.Value, this);
             Stats.GetStatusStatByAbbreviation(mod.stat).AddModifier(mod1);
         }
+        return -1;
     }
 }

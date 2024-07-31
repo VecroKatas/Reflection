@@ -15,8 +15,9 @@ public class EventCard : DrawableCard
     public int[] StatusStatModifiers => _StatusStatModifiersPerTick;
     public CardSummoner[] CardsSummonPerTick => _CardsSummonPerTick;
 
-    public void Play()
+    public int Play()
     {
+        this._HasBeenPlayed = true;
         StatusModifier cor = new StatusModifier(SStats.Cor, _StatusStatModifiersWhenPlayed[0], this);
         StatusModifier hap = new StatusModifier(SStats.Hap, _StatusStatModifiersWhenPlayed[0], this);
         StatusModifier hth = new StatusModifier(SStats.Hth, _StatusStatModifiersWhenPlayed[0], this);
@@ -38,14 +39,12 @@ public class EventCard : DrawableCard
         {
             int Determinant = Random.Range(0, 100);
             if (sumon.SummonChance > Determinant)
-            {
-                sumon.SummonedCard.Play();
-                break;
-            }
-        }          
+                return sumon.SummonedCard.CardID;
+        }
+        return -1;
     }
 
-    public void OnTick()
+    public int OnTick()
     {
         Stats.StatusStats.Corruption.AddInstantModifier(_StatusStatModifiersPerTick[0]);
         Stats.StatusStats.Happiness.AddInstantModifier(_StatusStatModifiersPerTick[1]);
@@ -60,11 +59,9 @@ public class EventCard : DrawableCard
         {
             int Determinant = Random.Range(0, 100);
             if (sumon.SummonChance > Determinant)
-            {
-                sumon.SummonedCard.Play();
-                break;
-            }
+                return sumon.SummonedCard.CardID;
         }
+        return -1;
     }
 }
 
