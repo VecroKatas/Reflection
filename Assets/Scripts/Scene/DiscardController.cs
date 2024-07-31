@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,5 +10,10 @@ public class DiscardController : MonoBehaviour
     public void DiscardCard(ICard card)
     {
         DiscardedCards.Add(card);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        throw new NotImplementedException();
     }
 }
