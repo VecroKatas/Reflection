@@ -18,7 +18,7 @@ public class DeckController : MonoBehaviour
     
     public ICard DrawCard([CanBeNull] ICard cardToDraw)
     {
-        //draw predetermined card, do needed calculations maybe?
+        //draw predetermined card by another card, do needed calculations maybe?
         return null;
     }
 
