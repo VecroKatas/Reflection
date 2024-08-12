@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class TableCard : MonoBehaviour
 {
-    public ICard AttachedCard;
+    public Card AttachedCard;
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private TextMeshProUGUI cardName;
     [SerializeField] private TextMeshProUGUI cardDescription;
