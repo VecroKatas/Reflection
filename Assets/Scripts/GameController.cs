@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
     public int CurrentSeason => CurrentTurn % 4;
 
     public int CurrentTurn;
-    public List<ICard> CardsToDraw = new List<ICard>();
+    public List<Card> CardsToDraw = new List<Card>();
 
     private void Start()
     {

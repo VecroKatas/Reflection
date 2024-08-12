@@ -9,6 +9,7 @@ public class CurrentTurnCondition : Condition
     [SerializeField] int MinTurn;
     [SerializeField] int MaxTurn;
 
+    override
     public bool IsFullfilled()
     {
         //Checks turn controller or smth
