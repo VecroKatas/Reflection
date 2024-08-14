@@ -34,7 +34,6 @@ public class GameController : MonoBehaviour
         _handController.DiscardAllCards();
         
         _handController.DrawCards(CardsToDraw);
-               
     }
 
     public void GameEnd()
