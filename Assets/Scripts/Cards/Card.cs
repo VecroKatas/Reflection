@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 
 [System.Serializable]
-public abstract class Card : ScriptableObject
+public class Card : ScriptableObject, ICard
 {
     [SerializeField] protected string _Name;
     [SerializeField] protected string _Description;
@@ -33,10 +33,19 @@ public abstract class Card : ScriptableObject
 
     public bool OnTheTable { get; set; }
     //value, which determines the chance to be drawn from deck
-    public abstract int Relevance();
+    public int Relevance()
+    {
+        return 0;
+    }
 
     //Are all conditions for card to appear in the deck met
-    public abstract bool CanBeDrawn();
+    public bool CanBeDrawn()
+    {     
+        return false;
+    }
 
-    public abstract int Play(); 
+    public int Play()
+    {
+        return 0;
+    }
 }
