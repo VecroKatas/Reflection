@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
     {
         //some initialization
         CurrentTurn = StartingTurn;
-        StartNextTurn();
+        //StartNextTurn();
     }
 
     public void StartNextTurn()
