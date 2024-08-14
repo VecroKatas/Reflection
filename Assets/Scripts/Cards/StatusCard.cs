@@ -8,8 +8,7 @@ public class StatusCard : Card
     [SerializeField] BStatModifier[] _BStatModifiers;
     [SerializeField] SStatModifier[] _SStatModifiers;
 
-    override
-    public int Play()
+    int Play()
     {
         this._HasBeenPlayed = true;
         foreach (BStatModifier mod in _BStatModifiers)
@@ -23,17 +22,5 @@ public class StatusCard : Card
             Stats.GetStatusStatByAbbreviation(mod.stat).AddModifier(mod1);
         }
         return -1;
-    }
-
-    override
-    public int Relevance()
-    {       
-        return 0;
-    }
-
-    override
-    public bool CanBeDrawn()
-    {
-        return false;
     }
 }

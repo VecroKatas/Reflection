@@ -10,7 +10,6 @@ public class SStatCondition : Condition
     [SerializeField] float MinValue;
     [SerializeField] float MaxValue;
 
-    override
     public bool IsFullfilled()
     {
         if (Stats.GetStatusStatByAbbreviation(stat).Score >= MinValue

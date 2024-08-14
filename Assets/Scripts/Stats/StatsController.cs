@@ -147,9 +147,9 @@ public class BasicModifier
 {
     public int Value { get; }
     public BStats Stat;
-    public Card CardProvoked;
+    public ICard CardProvoked;
 
-    public BasicModifier(BStats stat, int value, Card Card)
+    public BasicModifier(BStats stat, int value, ICard Card)
     {
         Value = value;
         Stat = stat;
@@ -217,9 +217,9 @@ public class StatusModifier
 {
     public float Value { get; }
     public SStats Stat;
-    public Card CardProvoked;
+    public ICard CardProvoked;
     
-    public StatusModifier(SStats stat, float value, Card Card)
+    public StatusModifier(SStats stat, float value, ICard Card)
     {
         Value = value;
         Stat = stat;
