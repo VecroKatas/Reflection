@@ -11,7 +11,6 @@ public class OpportunityCard : DrawableCard
     public int FunValue => _FunValue;
     public int UsefulValue => _UsefulValue;
 
-    override
     public int Play()
     {
         this._HasBeenPlayed = true;

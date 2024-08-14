@@ -15,7 +15,7 @@ public class HandCardController : MonoBehaviour, IBeginDragHandler, IEndDragHand
     [SerializeField] private Vector3 minSize;
     [SerializeField] private Vector3 maxSize;
 
-    public Card AttachedCard;
+    public ICard AttachedCard;
     
     private bool scaleUpEnded = false;
     private bool pointerExited = true;

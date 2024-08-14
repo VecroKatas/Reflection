@@ -10,19 +10,19 @@ public class DeckController : MonoBehaviour
 
     private Random _random = new System.Random();
     
-    public Card DrawCard()
+    public ICard DrawCard()
     {
         // calculate card to draw
         return GetCard();
     }
     
-    public Card DrawCard([CanBeNull] Card cardToDraw)
+    public ICard DrawCard([CanBeNull] ICard cardToDraw)
     {
         //draw predetermined card by another card, do needed calculations maybe?
         return null;
     }
 
-    private Card GetCard()
+    private ICard GetCard()
     {
         int Length = _cardsDatabase.Cards.Length;
         int[] RelevanceValues = new int[Length];
@@ -46,7 +46,7 @@ public class DeckController : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        foreach (Card card in _cardsDatabase.Cards)
+        foreach (ICard card in _cardsDatabase.Cards)
             card.HasBeenPlayed = true;
     }
 }
