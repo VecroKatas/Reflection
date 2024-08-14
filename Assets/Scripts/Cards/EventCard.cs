@@ -15,7 +15,6 @@ public class EventCard : DrawableCard
     public int[] StatusStatModifiers => _StatusStatModifiersPerTick;
     public CardSummoner[] CardsSummonPerTick => _CardsSummonPerTick;
 
-    override
     public int Play()
     {
         this._HasBeenPlayed = true;
