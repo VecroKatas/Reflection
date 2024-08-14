@@ -5,10 +5,10 @@ using UnityEngine;
 public class TableController : MonoBehaviour
 {
     [SerializeField] private GameObject tableCard;
-    public List<ICard> CardsOnTable = new List<ICard>();
+    public List<Card> CardsOnTable = new List<Card>();
     public Camera targetCamera;
 
-    public void PlayCard(ICard card)
+    public void PlayCard(Card card)
     {
         CardsOnTable.Add(card);
         card.Play();

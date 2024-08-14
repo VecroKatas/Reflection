@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class DrawableCard : Card
+public abstract class DrawableCard : Card
 {
     [SerializeField] protected BStatProbabilityModifier[] _BStatProbabilityModifiers;
     [SerializeField] protected SStatProbabilityModifier[] _SStatProbabilityModifiers;
@@ -11,6 +11,7 @@ public class DrawableCard : Card
 
     [SerializeField] protected Condition[] _Conditions;
 
+    override
     public int Relevance()
     {
         float relevance = 0;
@@ -28,6 +29,7 @@ public class DrawableCard : Card
     }
 
     //Are all conditions for card to appear in the deck met
+    override
     public bool CanBeDrawn()
     {
         Condition FalseCondition = _Conditions.FirstOrDefault(condition => !condition.IsFullfilled());

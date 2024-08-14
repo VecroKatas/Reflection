@@ -10,6 +10,7 @@ public class BStatCondition : Condition
     [SerializeField] int MinValue;
     [SerializeField] int MaxValue;
 
+    override
     public bool IsFullfilled()
     {
         if (Stats.GetBasicStatByAbbreviation(stat).Score >= MinValue
