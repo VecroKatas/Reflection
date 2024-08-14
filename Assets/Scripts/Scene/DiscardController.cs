@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class DiscardController : MonoBehaviour
 {
-    public List<ICard> DiscardedCards = new List<ICard>();
+    public List<Card> DiscardedCards = new List<Card>();
 
-    public void DiscardCard(ICard card)
+    public void DiscardCard(Card card)
     {
         DiscardedCards.Add(card);
     }

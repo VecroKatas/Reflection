@@ -14,7 +14,7 @@ public class HandController : MonoBehaviour
     
     [SerializeField] private GameObject HandCard;
     public int MaxHandSize = 10;
-    public List<ICard> Cards = new List<ICard>();
+    public List<Card> Cards = new List<Card>();
     public List<HandCardController> HandCards = new List<HandCardController>();
 
     public void CheckHand()
@@ -27,11 +27,11 @@ public class HandController : MonoBehaviour
         }
     }
 
-    public void DrawCards([CanBeNull] List<ICard> cardsToDraw)
+    public void DrawCards([CanBeNull] List<Card> cardsToDraw)
     {
         while (Cards.Count < MaxHandSize)
         {
-            ICard drawnCard;
+            Card drawnCard;
             if (cardsToDraw.Count > 0) // does it work?
             {
                 drawnCard = _deckController.DrawCard(cardsToDraw[0]);
@@ -46,7 +46,7 @@ public class HandController : MonoBehaviour
         }
     }
 
-    private void CreateCardInHand(ICard card)
+    private void CreateCardInHand(Card card)
     {
         GameObject cardInHand = Instantiate(HandCard, Vector3.zero, Quaternion.identity);
         cardInHand.GetComponent<HandCardController>().AttachedCard = card;
