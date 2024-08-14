@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         //some initialization
+        //minor changes
         CurrentTurn = StartingTurn;
         //StartNextTurn();
     }
