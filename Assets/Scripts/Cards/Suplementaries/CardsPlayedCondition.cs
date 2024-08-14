@@ -8,6 +8,7 @@ public class CardsPlayedCondition : Condition
 {
     [SerializeField] Card[] NeccesaryCards;
 
+    override
     public bool IsFullfilled()
     {
         foreach (Card card in NeccesaryCards)
