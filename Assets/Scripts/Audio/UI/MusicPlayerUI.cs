@@ -21,13 +21,15 @@ public class MusicPlayerUI : MonoBehaviour
 
     private void Awake()
     {
-        _musicPlayer.ClipChanged += (clip) => StartCoroutine(ClipChangedAnimation(clip));
+        _musicPlayer.ClipChanged += ClipChanged;
     }
 
     private void ClipChanged(MusicClipData clip)
     {
         _clipNameText.text = clip.Name;
         _authorNameText.text = clip.Author;
+
+        StartCoroutine(ClipChangedAnimation(clip));
     }
 
     IEnumerator ClipChangedAnimation(MusicClipData clip)
@@ -35,12 +37,13 @@ public class MusicPlayerUI : MonoBehaviour
         if (!isDown)
         {
             isCourutinePlaying = true;
+            
             yield return new WaitForSeconds(2);
 
             LeftDropDown();
-            ClipChanged(clip);
 
             yield return new WaitForSeconds(6);
+            
             isCourutinePlaying = false;
             LeftDrawUp();
         }
