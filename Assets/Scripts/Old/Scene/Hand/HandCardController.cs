@@ -27,8 +27,8 @@ public class HandCardController : MonoBehaviour, IBeginDragHandler, IEndDragHand
 
     private void Start()
     {
-        cardName.text = AttachedCard.Name;
-        cardDescription.text = AttachedCard.Description;
+        //cardName.text = AttachedCard.Name;
+        //cardDescription.text = AttachedCard.Description;
     }
 
     public void PointerEnter()
